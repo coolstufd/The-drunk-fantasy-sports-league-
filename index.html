@@ -1,0 +1,2143 @@
+<!DOCTYPE html>
+<!-- saved from url=(0037)https://litter.catbox.moe/yfm6dn.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Character Fantasy — Like ESPN Fantasy, With Characters</title>
+  <style>
+:root {
+  --bg: #0a0e17;
+  --bg-card: #121826;
+  --bg-elevated: #1a2236;
+  --text: #f0f4f8;
+  --text-muted: #8b9bb4;
+  --accent: #e31837;          /* ESPN red */
+  --accent-hover: #ff2a4a;
+  --primary: #1a73e8;         /* clean blue */
+  --primary-hover: #3b8bf0;
+  --success: #00c853;
+  --danger: #ff5252;
+  --border: #1e2a40;
+  --glow: rgba(26, 115, 232, 0.25);
+  --font-display: 'Bebas Neue', 'Arial Black', sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* subtle grid background like sports sites */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(26, 115, 232, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26, 115, 232, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Header - ESPN style */
+.header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background: #0a0e17;
+  border-bottom: 3px solid var(--accent);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
+  color: white;
+}
+
+.logo-icon { font-size: 1.6rem; }
+
+.nav {
+  display: flex;
+  gap: 1.75rem;
+}
+
+.nav a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: color 0.15s;
+}
+
+.nav a:hover { color: white; }
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.2rem;
+  border: none;
+  border-radius: 4px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+}
+.btn-primary:hover {
+  background: var(--primary-hover);
+}
+
+.btn-accent {
+  background: var(--accent);
+  color: white;
+}
+.btn-accent:hover {
+  background: var(--accent-hover);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn-ghost:hover {
+  background: var(--bg-elevated);
+  border-color: var(--text-muted);
+}
+
+.btn-lg {
+  padding: 0.8rem 1.6rem;
+  font-size: 1rem;
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  min-height: 92vh;
+  padding: 7rem 3rem 3rem;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 6vw, 4.8rem);
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.highlight {
+  color: var(--accent);
+}
+
+.hero-sub {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  max-width: 480px;
+  margin-bottom: 1.75rem;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 2.25rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 0.2rem;
+}
+
+.hero-visual {
+  display: flex;
+  justify-content: center;
+}
+
+.draft-board-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: 100%;
+  max-width: 300px;
+}
+
+.pick-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 4px;
+  padding: 0.9rem 1.1rem;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+/* Sections */
+.section {
+  position: relative;
+  z-index: 1;
+  padding: 4.5rem 1.5rem;
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  text-align: center;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.section-sub {
+  text-align: center;
+  color: var(--text-muted);
+  max-width: 560px;
+  margin: 0 auto 2.5rem;
+  font-size: 1.05rem;
+}
+
+/* Modes */
+.modes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.25rem;
+}
+
+.mode-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.15s, transform 0.15s;
+}
+
+.mode-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-3px);
+}
+
+.mode-card.featured {
+  border-color: var(--accent);
+  background: linear-gradient(160deg, var(--bg-card), #1a1218);
+}
+
+.mode-icon {
+  font-size: 2.1rem;
+  margin-bottom: 0.75rem;
+}
+
+.mode-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.mode-card p {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  margin-bottom: 0.9rem;
+  flex-grow: 1;
+}
+
+.mode-card ul {
+  list-style: none;
+  margin-bottom: 1.25rem;
+}
+
+.mode-card li {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  padding: 0.2rem 0 0.2rem 1.1rem;
+  position: relative;
+}
+
+.mode-card li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* Players */
+.player-filters {
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.75rem;
+}
+
+.filter-btn {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 0.4rem 0.9rem;
+  border-radius: 3px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-transform: uppercase;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
+.players-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 0.75rem;
+}
+
+.player-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.9rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  transition: border-color 0.15s;
+}
+
+.player-card:hover {
+  border-color: var(--primary);
+}
+
+.player-pos {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
+.pos-QB { background: #1a73e8; color: white; }
+.pos-RB { background: #00c853; color: white; }
+.pos-WR { background: #ffab00; color: #111; }
+.pos-TE { background: #7c4dff; color: white; }
+.pos-K { background: #546e7a; color: white; }
+.pos-DEF { background: #e31837; color: white; }
+
+.player-info { flex: 1; min-width: 0; }
+
+.player-name {
+  font-weight: 700;
+  font-size: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.player-meta {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.player-rank {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--accent);
+  min-width: 1.8rem;
+  text-align: right;
+}
+
+/* Draft Section */
+.draft-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.1rem;
+  align-items: flex-end;
+  justify-content: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.control-group label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.control-group input,
+.control-group select {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.5rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-family: var(--font-body);
+  min-width: 130px;
+}
+
+.control-group input:focus,
+.control-group select:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.draft-area {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.25rem;
+}
+
+.draft-area.hidden { display: none; }
+
+.draft-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1.25rem;
+}
+
+.current-pick .label {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.current-pick .team-name {
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+.current-pick .pick-num {
+  display: block;
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
+
+.timer {
+  font-family: var(--font-display);
+  font-size: 2.3rem;
+  color: var(--primary);
+  min-width: 70px;
+  text-align: center;
+}
+
+.draft-layout {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 1rem;
+  min-height: 400px;
+}
+
+.available-players,
+.my-roster,
+.draft-log {
+  background: var(--bg);
+  border-radius: 4px;
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.available-players h3,
+.my-roster h3,
+.draft-log h3 {
+  font-size: 0.8rem;
+  margin-bottom: 0.6rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+.search-wrap { margin-bottom: 0.6rem; }
+
+.search-wrap input {
+  width: 100%;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.45rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+.search-wrap input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.player-list {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.available-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.6rem;
+  background: var(--bg-card);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.12s;
+  border: 1px solid transparent;
+}
+
+.available-item:hover {
+  background: var(--bg-elevated);
+  border-color: var(--primary);
+}
+
+.available-item .pos {
+  width: 30px;
+  height: 30px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.available-item .name {
+  flex: 1;
+  font-weight: 600;
+  font-size: 0.88rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.available-item .rank {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-family: var(--font-display);
+}
+
+.roster-slots {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex: 1;
+  overflow-y: auto;
+  max-height: 400px;
+}
+
+.roster-slot {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.6rem;
+  background: var(--bg-card);
+  border-radius: 3px;
+  border: 1px dashed var(--border);
+  min-height: 40px;
+}
+
+.roster-slot.filled {
+  border-style: solid;
+  border-color: var(--success);
+  background: rgba(0, 200, 83, 0.07);
+}
+
+.roster-slot .slot-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: 700;
+  width: 34px;
+  flex-shrink: 0;
+}
+
+.roster-slot .player-name {
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.log-entries {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.log-entry {
+  font-size: 0.8rem;
+  padding: 0.35rem 0.5rem;
+  background: var(--bg-card);
+  border-radius: 3px;
+  color: var(--text-muted);
+}
+
+.log-entry.mine {
+  color: var(--text);
+  background: rgba(26, 115, 232, 0.12);
+  border-left: 3px solid var(--primary);
+}
+
+/* How it works */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 1.75rem;
+}
+
+.step { text-align: center; }
+
+.step-num {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: white;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.85rem;
+}
+
+.step h3 {
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: 0.03em;
+}
+
+.step p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* Footer */
+.footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--border);
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+}
+
+.footer-content {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.footer .logo {
+  justify-content: center;
+  margin-bottom: 0.75rem;
+}
+
+.footer p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+}
+
+.disclaimer {
+  font-size: 0.75rem !important;
+  opacity: 0.65;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 1rem;
+}
+
+.modal.hidden { display: none; }
+
+.modal-content {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.75rem;
+  max-width: 440px;
+  width: 100%;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-close {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.4rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.modal-close:hover { color: var(--text); }
+
+.modal-content h2 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  margin-bottom: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.modal-form label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.modal-form input,
+.modal-form select {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.6rem 0.85rem;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  width: 100%;
+}
+
+.modal-form input:focus,
+.modal-form select:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 0.4rem;
+}
+
+.modal-actions .btn { flex: 1; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 6.5rem 1.25rem 2.5rem;
+    text-align: center;
+  }
+  .hero-sub { margin-left: auto; margin-right: auto; }
+  .hero-cta { justify-content: center; }
+  .hero-stats { justify-content: center; }
+  .hero-visual { display: none; }
+  .nav { display: none; }
+  .draft-layout { grid-template-columns: 1fr; }
+  .draft-controls { flex-direction: column; align-items: stretch; }
+  .control-group input,
+  .control-group select { width: 100%; }
+}
+
+@media (max-width: 600px) {
+  .header { padding: 0.6rem 1rem; }
+  .section { padding: 3rem 1rem; }
+}
+
+/* Sport Selector Bar */
+.sport-bar {
+  position: sticky;
+  top: 56px;
+  z-index: 90;
+  background: #0d121c;
+  border-bottom: 1px solid var(--border);
+  padding: 0.6rem 1rem;
+}
+
+.sport-bar-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.sport-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-right: 0.4rem;
+}
+
+.sport-btn {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 0.4rem 0.9rem;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.sport-btn:hover {
+  border-color: var(--primary);
+  color: var(--text);
+}
+
+.sport-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
+/* Extra position colors for other sports */
+.pos-PG, .pos-SG, .pos-G { background: #1a73e8; color: white; }
+.pos-SF, .pos-PF, .pos-F { background: #00c853; color: white; }
+.pos-C { background: #ffab00; color: #111; }
+.pos-P { background: #1a73e8; color: white; }
+.pos-1B, .pos-2B, .pos-3B, .pos-SS { background: #00c853; color: white; }
+.pos-OF { background: #ffab00; color: #111; }
+.pos-LW, .pos-RW { background: #00c853; color: white; }
+.pos-D { background: #7c4dff; color: white; }
+
+@media (max-width: 600px) {
+  .sport-bar { top: 50px; }
+  .sport-label { display: none; }
+}
+
+</style>
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link href="./index_files/css2" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <span class="logo-icon">⚡</span>
+      <span class="logo-text">CHARACTER FANTASY</span>
+    </div>
+    <nav class="nav">
+      <a href="https://litter.catbox.moe/yfm6dn.html#modes">Leagues</a>
+      <a href="https://litter.catbox.moe/yfm6dn.html#players">Players</a>
+      <a href="https://litter.catbox.moe/yfm6dn.html#draft">Draft</a>
+      <a href="https://litter.catbox.moe/yfm6dn.html#how">How It Works</a>
+    </nav>
+    <button class="btn btn-accent" onclick="scrollToSection('modes')">Create / Join</button>
+  </header>
+
+  <!-- Sport Selector Bar -->
+  <div class="sport-bar">
+    <div class="sport-bar-inner">
+      <span class="sport-label">Choose Sport:</span>
+      <button class="sport-btn active" data-sport="football" onclick="setSport('football')">🏈 Football</button>
+      <button class="sport-btn" data-sport="basketball" onclick="setSport('basketball')">🏀 Basketball</button>
+      <button class="sport-btn" data-sport="baseball" onclick="setSport('baseball')">⚾ Baseball</button>
+      <button class="sport-btn" data-sport="hockey" onclick="setSport('hockey')">🏒 Hockey</button>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Fantasy Drafts.<br><span class="highlight">Character Edition.</span></h1>
+      <p class="hero-sub">The look and flow of ESPN Fantasy — public leagues, private leagues, CPU opponents, and full mock drafts — but every player is a fictional character.</p>
+      <div class="hero-cta">
+        <button class="btn btn-primary btn-lg" onclick="openMode('public')">Join Public League</button>
+        <button class="btn btn-ghost btn-lg" onclick="openMode('mock')">Start Mock Draft</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">4</span>
+          <span class="stat-label">Sports</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">0</span>
+          <span class="stat-label">Real Athletes</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">100+</span>
+          <span class="stat-label">Characters</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="draft-board-preview">
+        <div class="pick-card">1. Harry Potter</div>
+        <div class="pick-card">2. Rocket Raccoon</div>
+        <div class="pick-card">3. Mickey Mouse</div>
+        <div class="pick-card">4. Wreck-It Ralph</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modes -->
+  <section id="modes" class="section modes">
+    <h2 class="section-title">Leagues &amp; Drafts</h2>
+    <p class="section-sub">Same structure you know from major fantasy platforms. Pick your sport above, then choose how you want to play.</p>
+    
+    <div class="modes-grid">
+      <div class="mode-card">
+        <div class="mode-icon">🌍</div>
+        <h3>Public League</h3>
+        <p>Join an open league. Spots fill first-come. Live draft with other managers.</p>
+        <ul>
+          <li>8–12 teams</li>
+          <li>Snake or auction</li>
+          <li>Standard scoring</li>
+        </ul>
+        <button class="btn btn-primary" onclick="openMode('public')">Join Public</button>
+      </div>
+
+      <div class="mode-card">
+        <div class="mode-icon">🔐</div>
+        <h3>Private League</h3>
+        <p>Create a league code and send it to your friends. Everyone uses the same link and settings.</p>
+        <ul>
+          <li>Custom team count</li>
+          <li>Shareable invite code</li>
+          <li>Easy friend setup</li>
+        </ul>
+        <button class="btn btn-primary" onclick="openMode('private')">Create Private</button>
+      </div>
+
+      <div class="mode-card">
+        <div class="mode-icon">🤖</div>
+        <h3>vs CPUs</h3>
+        <p>Draft against computer managers. Ideal for practice or solo seasons.</p>
+        <ul>
+          <li>Multiple difficulties</li>
+          <li>Instant start</li>
+          <li>No waiting on humans</li>
+        </ul>
+        <button class="btn btn-primary" onclick="openMode('cpu')">Play vs CPUs</button>
+      </div>
+
+      <div class="mode-card featured">
+        <div class="mode-icon">📋</div>
+        <h3>Mock Draft</h3>
+        <p>Full practice draft. Reset as many times as you want. Zero consequences.</p>
+        <ul>
+          <li>Any team count</li>
+          <li>Live board + timer</li>
+          <li>Unlimited do-overs</li>
+        </ul>
+        <button class="btn btn-accent" onclick="openMode('mock')">Start Mock</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Players -->
+  <section id="players" class="section players">
+    <h2 class="section-title">Player Pool</h2>
+    <p class="section-sub">Rankings and ADP update when you switch sports. Every name is a fictional character.</p>
+    
+    <div class="player-filters"><button class="filter-btn active" data-pos="ALL">All</button><button class="filter-btn" data-pos="QB">QB</button><button class="filter-btn" data-pos="RB">RB</button><button class="filter-btn" data-pos="WR">WR</button><button class="filter-btn" data-pos="TE">TE</button><button class="filter-btn" data-pos="K">K</button><button class="filter-btn" data-pos="DEF">DEF</button></div>
+
+    <div class="players-grid" id="playersGrid">
+    <div class="player-card">
+      <div class="player-pos pos-QB">QB</div>
+      <div class="player-info">
+        <div class="player-name">Harry Potter</div>
+        <div class="player-meta">Gryffindor · ADP 1.1</div>
+      </div>
+      <div class="player-rank">#1</div>
+    </div>
+  
+    <div class="player-card">
+      <div class="player-pos pos-RB">RB</div>
+      <div class="player-info">
+        <div class="player-name">Rocket Raccoon</div>
+        <div class="player-meta">Guardians · ADP 1.8</div>
+      </div>
+      <div class="player-rank">#2</div>
+    </div>
+  
+    <div class="player-card">
+      <div class="player-pos pos-QB">QB</div>
+      <div class="player-info">
+        <div class="player-name">Mickey Mouse</div>
+        <div class="player-meta">Disney · ADP 2.9</div>
+      </div>
+      <div class="player-rank">#3</div>
+    </div>
+  
+    <div class="player-card">
+      <div class="player-pos pos-RB">RB</div>
+      <div class="player-info">
+        <div class="player-name">Wreck-It Ralph</div>
+        <div class="player-meta">Arcade · ADP 3.6</div>
+      </div>
+      <div class="player-rank">#4</div>
+    </div>
+  
+    <div class="player-card">
+      <div class="player-pos pos-QB">QB</div>
+      <div class="player-info">
+        <div class="player-name">Iron Man</div>
+        <div class="player-meta">Stark · ADP 4.8</div>
+      </div>
+      <div class="player-rank">#5</div>
+    </div>
+  
+    <div class="player-card">
+      <div class="player-pos pos-RB">RB</div>
+      <div class="player-info">
+        <div class="player-name">Hulk</div>
+        <div class="player-meta">Stark · ADP 5.4</div>
+      </div>
+      <div class="player-rank">#6</div>
+    </div>
+  
+    <div class="player-card">
+      <div class="player-pos pos-WR">WR</div>
+      <div class="player-info">
+        <div class="player-name">Hermione</div>
+        <div class="player-meta">Gryffindor · ADP 6.5</div>
+      </div>
+      <div class="player-rank">#7</div>
+    </div>
+  
+    <div class="player-card">
+      <div class="player-pos pos-RB">RB</div>
+      <div class="player-info">
+        <div class="player-name">Simba</div>
+        <div class="player-meta">Pride Rock · ADP 7.7</div>
+      </div>
+      <div class="player-rank">#8</div>
+    </div>
+  
+    <div class="player-card">
+      <div class="player-pos pos-QB">QB</div>
+      <div class="player-info">
+        <div class="player-name">Sonic</div>
+        <div class="player-meta">Green Hill · ADP 8.5</div>
+      </div>
+      <div class="player-rank">#9</div>
+    </div>
+  
+    <div class="player-card">
+      <div class="player-pos pos-WR">WR</div>
+      <div class="player-info">
+        <div class="player-name">Spider-Man</div>
+        <div class="player-meta">Stark · ADP 9.4</div>
+      </div>
+      <div class="player-rank">#10</div>
+    </div>
+  
+    <div class="player-card">
+      <div class="player-pos pos-WR">WR</div>
+      <div class="player-info">
+        <div class="player-name">Elsa</div>
+        <div class="player-meta">Disney · ADP 10.8</div>
+      </div>
+      <div class="player-rank">#11</div>
+    </div>
+  
+    <div class="player-card">
+      <div class="player-pos pos-RB">RB</div>
+      <div class="player-info">
+        <div class="player-name">Groot</div>
+        <div class="player-meta">Guardians · ADP 11.3</div>
+      </div>
+      <div class="player-rank">#12</div>
+    </div>
+  
+    <div class="player-card">
+      <div class="player-pos pos-QB">QB</div>
+      <div class="player-info">
+        <div class="player-name">Mario</div>
+        <div class="player-meta">Mushroom · ADP 13.2</div>
+      </div>
+      <div class="player-rank">#14</div>
+    </div>
+  
+    <div class="player-card">
+      <div class="player-pos pos-WR">WR</div>
+      <div class="player-info">
+        <div class="player-name">Batman</div>
+        <div class="player-meta">Gotham · ADP 14.3</div>
+      </div>
+      <div class="player-rank">#15</div>
+    </div>
+  
+    <div class="player-card">
+      <div class="player-pos pos-TE">TE</div>
+      <div class="player-info">
+        <div class="player-name">Ron Weasley</div>
+        <div class="player-meta">Gryffindor · ADP 15.5</div>
+      </div>
+      <div class="player-rank">#16</div>
+    </div>
+  
+    <div class="player-card">
+      <div class="player-pos pos-RB">RB</div>
+      <div class="player-info">
+        <div class="player-name">Buzz Lightyear</div>
+        <div class="player-meta">Toy Story · ADP 16.1</div>
+      </div>
+      <div class="player-rank">#17</div>
+    </div>
+  
+    <div class="player-card">
+      <div class="player-pos pos-WR">WR</div>
+      <div class="player-info">
+        <div class="player-name">Yoda</div>
+        <div class="player-meta">Jedi · ADP 17.2</div>
+      </div>
+      <div class="player-rank">#18</div>
+    </div>
+  
+    <div class="player-card">
+      <div class="player-pos pos-QB">QB</div>
+      <div class="player-info">
+        <div class="player-name">Shrek</div>
+        <div class="player-meta">Swamp · ADP 18</div>
+      </div>
+      <div class="player-rank">#19</div>
+    </div>
+  
+    <div class="player-card">
+      <div class="player-pos pos-TE">TE</div>
+      <div class="player-info">
+        <div class="player-name">Thor</div>
+        <div class="player-meta">Asgard · ADP 19.3</div>
+      </div>
+      <div class="player-rank">#20</div>
+    </div>
+  
+    <div class="player-card">
+      <div class="player-pos pos-WR">WR</div>
+      <div class="player-info">
+        <div class="player-name">Captain America</div>
+        <div class="player-meta">Stark · ADP 20.1</div>
+      </div>
+      <div class="player-rank">#21</div>
+    </div>
+  
+    <div class="player-card">
+      <div class="player-pos pos-RB">RB</div>
+      <div class="player-info">
+        <div class="player-name">Pikachu</div>
+        <div class="player-meta">Kanto · ADP 21</div>
+      </div>
+      <div class="player-rank">#22</div>
+    </div>
+  
+    <div class="player-card">
+      <div class="player-pos pos-DEF">DEF</div>
+      <div class="player-info">
+        <div class="player-name">The Avengers</div>
+        <div class="player-meta">Stark · ADP 22.5</div>
+      </div>
+      <div class="player-rank">#23</div>
+    </div>
+  
+    <div class="player-card">
+      <div class="player-pos pos-WR">WR</div>
+      <div class="player-info">
+        <div class="player-name">Woody</div>
+        <div class="player-meta">Toy Story · ADP 23.4</div>
+      </div>
+      <div class="player-rank">#24</div>
+    </div>
+  
+    <div class="player-card">
+      <div class="player-pos pos-TE">TE</div>
+      <div class="player-info">
+        <div class="player-name">Chewbacca</div>
+        <div class="player-meta">Rebel · ADP 24.1</div>
+      </div>
+      <div class="player-rank">#25</div>
+    </div>
+  
+    <div class="player-card">
+      <div class="player-pos pos-DEF">DEF</div>
+      <div class="player-info">
+        <div class="player-name">Jedi Council</div>
+        <div class="player-meta">Jedi · ADP 25.3</div>
+      </div>
+      <div class="player-rank">#26</div>
+    </div>
+  
+    <div class="player-card">
+      <div class="player-pos pos-RB">RB</div>
+      <div class="player-info">
+        <div class="player-name">SpongeBob</div>
+        <div class="player-meta">Bikini Bottom · ADP 26.2</div>
+      </div>
+      <div class="player-rank">#27</div>
+    </div>
+  
+    <div class="player-card">
+      <div class="player-pos pos-WR">WR</div>
+      <div class="player-info">
+        <div class="player-name">Deadpool</div>
+        <div class="player-meta">Merc · ADP 27</div>
+      </div>
+      <div class="player-rank">#28</div>
+    </div>
+  
+    <div class="player-card">
+      <div class="player-pos pos-DEF">DEF</div>
+      <div class="player-info">
+        <div class="player-name">The Incredibles</div>
+        <div class="player-meta">Super · ADP 28.4</div>
+      </div>
+      <div class="player-rank">#29</div>
+    </div>
+  
+    <div class="player-card">
+      <div class="player-pos pos-TE">TE</div>
+      <div class="player-info">
+        <div class="player-name">Olaf</div>
+        <div class="player-meta">Disney · ADP 29</div>
+      </div>
+      <div class="player-rank">#30</div>
+    </div>
+  
+    <div class="player-card">
+      <div class="player-pos pos-WR">WR</div>
+      <div class="player-info">
+        <div class="player-name">Moana</div>
+        <div class="player-meta">Disney · ADP 30.2</div>
+      </div>
+      <div class="player-rank">#31</div>
+    </div>
+  
+    <div class="player-card">
+      <div class="player-pos pos-DEF">DEF</div>
+      <div class="player-info">
+        <div class="player-name">Guardians</div>
+        <div class="player-meta">Guardians · ADP 32.1</div>
+      </div>
+      <div class="player-rank">#33</div>
+    </div>
+  
+    <div class="player-card">
+      <div class="player-pos pos-K">K</div>
+      <div class="player-info">
+        <div class="player-name">Frodo</div>
+        <div class="player-meta">Fellowship · ADP 34</div>
+      </div>
+      <div class="player-rank">#35</div>
+    </div>
+  
+    <div class="player-card">
+      <div class="player-pos pos-DEF">DEF</div>
+      <div class="player-info">
+        <div class="player-name">Minions</div>
+        <div class="player-meta">Despicable · ADP 36</div>
+      </div>
+      <div class="player-rank">#37</div>
+    </div>
+  
+    <div class="player-card">
+      <div class="player-pos pos-K">K</div>
+      <div class="player-info">
+        <div class="player-name">Link</div>
+        <div class="player-meta">Hyrule · ADP 37.2</div>
+      </div>
+      <div class="player-rank">#38</div>
+    </div>
+  
+    <div class="player-card">
+      <div class="player-pos pos-K">K</div>
+      <div class="player-info">
+        <div class="player-name">Gandalf</div>
+        <div class="player-meta">Fellowship · ADP 40.1</div>
+      </div>
+      <div class="player-rank">#41</div>
+    </div>
+  </div>
+  </section>
+
+  <!-- Live Draft -->
+  <section id="draft" class="section draft-section">
+    <h2 class="section-title">Live Draft Board</h2>
+    <p class="section-sub">Snake draft with on-the-clock timer, auto-pick, search, and live log — just like the big sites.</p>
+
+    <div class="draft-controls">
+      <div class="control-group">
+        <label>Your Team Name</label>
+        <input type="text" id="teamName" value="Team Character" maxlength="20">
+      </div>
+      <div class="control-group">
+        <label>Teams</label>
+        <select id="teamCount">
+          <option value="8">8 Teams</option>
+          <option value="10" selected="">10 Teams</option>
+          <option value="12">12 Teams</option>
+        </select>
+      </div>
+      <div class="control-group">
+        <label>Your Pick Slot</label>
+        <select id="pickSlot">
+          <option value="1">1st Overall</option>
+          <option value="3">3rd</option>
+          <option value="5" selected="">5th</option>
+          <option value="7">7th</option>
+          <option value="10">10th</option>
+        </select>
+      </div>
+      <button class="btn btn-accent btn-lg" id="startDraftBtn">Start Mock Draft</button>
+      <button class="btn btn-ghost btn-lg" onclick="shareDraftSettings()">Share Settings With Friends</button>
+    </div>
+
+    <div id="draftArea" class="draft-area hidden">
+      <div class="draft-status">
+        <div class="current-pick">
+          <span class="label">On the Clock</span>
+          <span class="team-name" id="onClock">—</span>
+          <span class="pick-num" id="pickNum">Pick 1.01</span>
+        </div>
+        <div class="timer" id="timer">0:30</div>
+        <button class="btn btn-ghost" id="autoPickBtn">Auto-Pick</button>
+      </div>
+
+      <div class="draft-layout">
+        <div class="available-players">
+          <h3>Available Players</h3>
+          <div class="search-wrap">
+            <input type="text" id="playerSearch" placeholder="Search name or position...">
+          </div>
+          <div class="player-list" id="availableList"></div>
+        </div>
+
+        <div class="my-roster">
+          <h3>Your Roster</h3>
+          <div class="roster-slots" id="myRoster"></div>
+        </div>
+
+        <div class="draft-log">
+          <h3>Draft Log</h3>
+          <div class="log-entries" id="draftLog"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section id="how" class="section how">
+    <h2 class="section-title">How It Works</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Pick a Sport</h3>
+        <p>Football, Basketball, Baseball, or Hockey. Positions and player pool change automatically.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Choose League Type</h3>
+        <p>Public, private with invite code, CPU opponents, or pure mock practice.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Draft Characters</h3>
+        <p>Harry Potter, Rocket, Mickey, Ralph, and the rest. No real athletes appear.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Run the Board</h3>
+        <p>Live timer, auto-pick, search, roster slots, and full draft log — same flow as ESPN-style sites.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="logo">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text">CHARACTER FANTASY</span>
+      </div>
+      <p>Modeled after the structure and feel of major fantasy sports platforms.</p>
+      <p class="disclaimer">All characters are fictional. This is not affiliated with ESPN, any real sports league, or any official fantasy product.</p>
+    </div>
+  </footer>
+
+  <div id="modeModal" class="modal hidden">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">×</button>
+      <h2 id="modalTitle">Start League</h2>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  
+  <script>
+// Completely fictional characters — no real athletes
+// Organized by sport
+
+const SPORTS = {
+  football: {
+    name: "Football",
+    icon: "🏈",
+    positions: ["QB", "RB", "WR", "TE", "K", "DEF"],
+    rosterSlots: ["QB", "RB", "RB", "WR", "WR", "WR", "TE", "FLEX", "K", "DEF", "BN", "BN", "BN"],
+    players: [
+      { id: 101, name: "Harry Potter", pos: "QB", team: "Gryffindor", rank: 1, adp: 1.1, note: "Golden arm" },
+      { id: 102, name: "Mickey Mouse", pos: "QB", team: "Disney", rank: 3, adp: 2.9, note: "Classic pocket passer" },
+      { id: 103, name: "Iron Man", pos: "QB", team: "Stark", rank: 5, adp: 4.8, note: "High-tech release" },
+      { id: 104, name: "Sonic", pos: "QB", team: "Green Hill", rank: 9, adp: 8.5, note: "Blazing quick" },
+      { id: 105, name: "Mario", pos: "QB", team: "Mushroom", rank: 14, adp: 13.2, note: "Power-up throws" },
+      { id: 106, name: "Shrek", pos: "QB", team: "Swamp", rank: 19, adp: 18.0, note: "Big arm" },
+      { id: 107, name: "Rocket Raccoon", pos: "RB", team: "Guardians", rank: 2, adp: 1.8, note: "Explosive" },
+      { id: 108, name: "Wreck-It Ralph", pos: "RB", team: "Arcade", rank: 4, adp: 3.6, note: "Power back" },
+      { id: 109, name: "Hulk", pos: "RB", team: "Stark", rank: 6, adp: 5.4, note: "Unstoppable" },
+      { id: 110, name: "Simba", pos: "RB", team: "Pride Rock", rank: 8, adp: 7.7, note: "Open-field king" },
+      { id: 111, name: "Groot", pos: "RB", team: "Guardians", rank: 12, adp: 11.3, note: "I am Groot" },
+      { id: 112, name: "Buzz Lightyear", pos: "RB", team: "Toy Story", rank: 17, adp: 16.1, note: "To the end zone" },
+      { id: 113, name: "Pikachu", pos: "RB", team: "Kanto", rank: 22, adp: 21.0, note: "Shocking speed" },
+      { id: 114, name: "SpongeBob", pos: "RB", team: "Bikini Bottom", rank: 27, adp: 26.2, note: "Never stops" },
+      { id: 115, name: "Hermione", pos: "WR", team: "Gryffindor", rank: 7, adp: 6.5, note: "Smartest routes" },
+      { id: 116, name: "Spider-Man", pos: "WR", team: "Stark", rank: 10, adp: 9.4, note: "Web-slinging YAC" },
+      { id: 117, name: "Elsa", pos: "WR", team: "Disney", rank: 11, adp: 10.8, note: "Freezes coverage" },
+      { id: 118, name: "Batman", pos: "WR", team: "Gotham", rank: 15, adp: 14.3, note: "Always open" },
+      { id: 119, name: "Yoda", pos: "WR", team: "Jedi", rank: 18, adp: 17.2, note: "Size matters not" },
+      { id: 120, name: "Captain America", pos: "WR", team: "Stark", rank: 21, adp: 20.1, note: "Shield routes" },
+      { id: 121, name: "Woody", pos: "WR", team: "Toy Story", rank: 24, adp: 23.4, note: "Reach for the sky" },
+      { id: 122, name: "Deadpool", pos: "WR", team: "Merc", rank: 28, adp: 27.0, note: "Breaks every rule" },
+      { id: 123, name: "Moana", pos: "WR", team: "Disney", rank: 31, adp: 30.2, note: "Deep threats" },
+      { id: 124, name: "Ron Weasley", pos: "TE", team: "Gryffindor", rank: 16, adp: 15.5, note: "Loyal target" },
+      { id: 125, name: "Thor", pos: "TE", team: "Asgard", rank: 20, adp: 19.3, note: "Thunderous red zone" },
+      { id: 126, name: "Chewbacca", pos: "TE", team: "Rebel", rank: 25, adp: 24.1, note: "Big body" },
+      { id: 127, name: "Olaf", pos: "TE", team: "Disney", rank: 30, adp: 29.0, note: "Warm hands" },
+      { id: 128, name: "Frodo", pos: "K", team: "Fellowship", rank: 35, adp: 34.0, note: "Carries the kick" },
+      { id: 129, name: "Link", pos: "K", team: "Hyrule", rank: 38, adp: 37.2, note: "Triforce accuracy" },
+      { id: 130, name: "Gandalf", pos: "K", team: "Fellowship", rank: 41, adp: 40.1, note: "You shall not miss" },
+      { id: 131, name: "The Avengers", pos: "DEF", team: "Stark", rank: 23, adp: 22.5, note: "Assemble on 3rd down" },
+      { id: 132, name: "Jedi Council", pos: "DEF", team: "Jedi", rank: 26, adp: 25.3, note: "Force coverage" },
+      { id: 133, name: "The Incredibles", pos: "DEF", team: "Super", rank: 29, adp: 28.4, note: "Family sacks" },
+      { id: 134, name: "Guardians", pos: "DEF", team: "Guardians", rank: 33, adp: 32.1, note: "Protect the galaxy" },
+      { id: 135, name: "Minions", pos: "DEF", team: "Despicable", rank: 37, adp: 36.0, note: "Chaotic swarm" },
+    ]
+  },
+
+  basketball: {
+    name: "Basketball",
+    icon: "🏀",
+    positions: ["PG", "SG", "SF", "PF", "C"],
+    rosterSlots: ["PG", "SG", "SF", "PF", "C", "G", "F", "UTIL", "BN", "BN", "BN"],
+    players: [
+      { id: 201, name: "Spider-Man", pos: "PG", team: "Stark", rank: 1, adp: 1.2, note: "Handles + webs" },
+      { id: 202, name: "Sonic", pos: "PG", team: "Green Hill", rank: 4, adp: 3.8, note: "Blazing crossover" },
+      { id: 203, name: "Bugs Bunny", pos: "PG", team: "Looney", rank: 8, adp: 7.5, note: "Trickster point" },
+      { id: 204, name: "Harry Potter", pos: "SG", team: "Gryffindor", rank: 2, adp: 2.1, note: "Magic mid-range" },
+      { id: 205, name: "Deadpool", pos: "SG", team: "Merc", rank: 6, adp: 5.6, note: "Chaotic scorer" },
+      { id: 206, name: "Mickey Mouse", pos: "SG", team: "Disney", rank: 11, adp: 10.4, note: "Classic shooter" },
+      { id: 207, name: "Batman", pos: "SF", team: "Gotham", rank: 3, adp: 2.9, note: "Two-way wing" },
+      { id: 208, name: "Captain America", pos: "SF", team: "Stark", rank: 7, adp: 6.7, note: "Shield defense" },
+      { id: 209, name: "Elsa", pos: "SF", team: "Disney", rank: 12, adp: 11.3, note: "Ice-cold threes" },
+      { id: 210, name: "Hulk", pos: "PF", team: "Stark", rank: 5, adp: 4.5, note: "Paint beast" },
+      { id: 211, name: "Wreck-It Ralph", pos: "PF", team: "Arcade", rank: 9, adp: 8.8, note: "Wrecks the paint" },
+      { id: 212, name: "Thor", pos: "PF", team: "Asgard", rank: 14, adp: 13.2, note: "Thunder dunks" },
+      { id: 213, name: "Groot", pos: "C", team: "Guardians", rank: 10, adp: 9.6, note: "I am rebound" },
+      { id: 214, name: "Chewbacca", pos: "C", team: "Rebel", rank: 13, adp: 12.4, note: "Hairy presence" },
+      { id: 215, name: "Shrek", pos: "C", team: "Swamp", rank: 16, adp: 15.1, note: "Ogre in the post" },
+      { id: 216, name: "Yoda", pos: "C", team: "Jedi", rank: 19, adp: 18.3, note: "Force in the paint" },
+      { id: 217, name: "Iron Man", pos: "SF", team: "Stark", rank: 15, adp: 14.0, note: "High-tech wing" },
+      { id: 218, name: "Hermione", pos: "PG", team: "Gryffindor", rank: 17, adp: 16.2, note: "IQ point guard" },
+      { id: 219, name: "Rocket", pos: "SG", team: "Guardians", rank: 18, adp: 17.5, note: "Shooting guard" },
+      { id: 220, name: "Simba", pos: "SF", team: "Pride Rock", rank: 20, adp: 19.4, note: "King of the wing" },
+    ]
+  },
+
+  baseball: {
+    name: "Baseball",
+    icon: "⚾",
+    positions: ["P", "C", "1B", "2B", "3B", "SS", "OF"],
+    rosterSlots: ["P", "P", "C", "1B", "2B", "3B", "SS", "OF", "OF", "OF", "UTIL", "BN", "BN"],
+    players: [
+      { id: 301, name: "Harry Potter", pos: "P", team: "Gryffindor", rank: 1, adp: 1.3, note: "Magic fastball" },
+      { id: 302, name: "Iron Man", pos: "P", team: "Stark", rank: 4, adp: 3.9, note: "Repulsor pitch" },
+      { id: 303, name: "Sonic", pos: "P", team: "Green Hill", rank: 8, adp: 7.6, note: "Blazing heater" },
+      { id: 304, name: "Batman", pos: "C", team: "Gotham", rank: 6, adp: 5.8, note: "Framing master" },
+      { id: 305, name: "Captain America", pos: "C", team: "Stark", rank: 12, adp: 11.5, note: "Shield behind the plate" },
+      { id: 306, name: "Hulk", pos: "1B", team: "Stark", rank: 2, adp: 2.2, note: "Mashes everything" },
+      { id: 307, name: "Wreck-It Ralph", pos: "1B", team: "Arcade", rank: 9, adp: 8.7, note: "Power first baseman" },
+      { id: 308, name: "Spider-Man", pos: "2B", team: "Stark", rank: 5, adp: 4.6, note: "Web-glove" },
+      { id: 309, name: "Mickey Mouse", pos: "2B", team: "Disney", rank: 14, adp: 13.3, note: "Classic contact" },
+      { id: 310, name: "Thor", pos: "3B", team: "Asgard", rank: 3, adp: 3.1, note: "Thunder bat" },
+      { id: 311, name: "Deadpool", pos: "3B", team: "Merc", rank: 11, adp: 10.4, note: "Chaotic hot corner" },
+      { id: 312, name: "Yoda", pos: "SS", team: "Jedi", rank: 7, adp: 6.9, note: "Force range" },
+      { id: 313, name: "Hermione", pos: "SS", team: "Gryffindor", rank: 13, adp: 12.6, note: "Smart glove" },
+      { id: 314, name: "Elsa", pos: "OF", team: "Disney", rank: 10, adp: 9.5, note: "Ice-cold bat" },
+      { id: 315, name: "Rocket", pos: "OF", team: "Guardians", rank: 15, adp: 14.2, note: "Speed in the alleys" },
+      { id: 316, name: "Simba", pos: "OF", team: "Pride Rock", rank: 16, adp: 15.4, note: "King of the gaps" },
+      { id: 317, name: "Buzz Lightyear", pos: "OF", team: "Toy Story", rank: 18, adp: 17.3, note: "To infinity" },
+      { id: 318, name: "Groot", pos: "OF", team: "Guardians", rank: 20, adp: 19.1, note: "I am outfielder" },
+      { id: 319, name: "Chewbacca", pos: "OF", team: "Rebel", rank: 22, adp: 21.0, note: "Big power" },
+      { id: 320, name: "Shrek", pos: "1B", team: "Swamp", rank: 17, adp: 16.5, note: "Ogre power" },
+    ]
+  },
+
+  hockey: {
+    name: "Hockey",
+    icon: "🏒",
+    positions: ["C", "LW", "RW", "D", "G"],
+    rosterSlots: ["C", "C", "LW", "RW", "D", "D", "G", "UTIL", "BN", "BN"],
+    players: [
+      { id: 401, name: "Harry Potter", pos: "C", team: "Gryffindor", rank: 1, adp: 1.4, note: "Magic playmaker" },
+      { id: 402, name: "Spider-Man", pos: "C", team: "Stark", rank: 5, adp: 4.7, note: "Sticky stick" },
+      { id: 403, name: "Sonic", pos: "LW", team: "Green Hill", rank: 3, adp: 2.8, note: "Speed on the wing" },
+      { id: 404, name: "Deadpool", pos: "LW", team: "Merc", rank: 8, adp: 7.6, note: "Chaotic scorer" },
+      { id: 405, name: "Batman", pos: "RW", team: "Gotham", rank: 4, adp: 3.9, note: "Two-way wing" },
+      { id: 406, name: "Iron Man", pos: "RW", team: "Stark", rank: 9, adp: 8.5, note: "High-tech shot" },
+      { id: 407, name: "Hulk", pos: "D", team: "Stark", rank: 2, adp: 2.1, note: "Hits everything" },
+      { id: 408, name: "Thor", pos: "D", team: "Asgard", rank: 6, adp: 5.8, note: "Thunder from the blue line" },
+      { id: 409, name: "Captain America", pos: "D", team: "Stark", rank: 11, adp: 10.4, note: "Shield defense" },
+      { id: 410, name: "Wreck-It Ralph", pos: "D", team: "Arcade", rank: 14, adp: 13.2, note: "Wrecks the crease" },
+      { id: 411, name: "Groot", pos: "G", team: "Guardians", rank: 7, adp: 6.9, note: "I am save" },
+      { id: 412, name: "Yoda", pos: "G", team: "Jedi", rank: 10, adp: 9.7, note: "Force saves" },
+      { id: 413, name: "Mickey Mouse", pos: "C", team: "Disney", rank: 12, adp: 11.5, note: "Classic center" },
+      { id: 414, name: "Elsa", pos: "LW", team: "Disney", rank: 13, adp: 12.6, note: "Ice-cold finisher" },
+      { id: 415, name: "Rocket", pos: "RW", team: "Guardians", rank: 15, adp: 14.3, note: "Shooting threat" },
+      { id: 416, name: "Chewbacca", pos: "D", team: "Rebel", rank: 16, adp: 15.4, note: "Hairy hits" },
+      { id: 417, name: "Shrek", pos: "G", team: "Swamp", rank: 17, adp: 16.5, note: "Ogre in net" },
+      { id: 418, name: "Hermione", pos: "C", team: "Gryffindor", rank: 18, adp: 17.3, note: "Smart pivots" },
+    ]
+  }
+};
+
+// Current active sport data (defaults to football)
+let PLAYERS = SPORTS.football.players.slice().sort((a, b) => a.rank - b.rank);
+let CURRENT_SPORT = "football";
+let SLOT_ORDER = SPORTS.football.rosterSlots;
+
+
+// ========== Sport Switching ==========
+function setSport(sportKey) {
+  if (!SPORTS[sportKey]) return;
+  CURRENT_SPORT = sportKey;
+  const sport = SPORTS[sportKey];
+  PLAYERS = sport.players.slice().sort((a, b) => a.rank - b.rank);
+  SLOT_ORDER = sport.rosterSlots;
+
+  // Update UI
+  document.querySelectorAll('.sport-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.sport === sportKey);
+  });
+
+  // Rebuild position filters
+  const filterContainer = document.querySelector('.player-filters');
+  if (filterContainer) {
+    let html = `<button class="filter-btn active" data-pos="ALL">All</button>`;
+    sport.positions.forEach(pos => {
+      html += `<button class="filter-btn" data-pos="${pos}">${pos}</button>`;
+    });
+    filterContainer.innerHTML = html;
+
+    // Re-bind filter clicks
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderPlayers(btn.dataset.pos);
+      });
+    });
+  }
+
+  renderPlayers('ALL');
+
+  // Reset any active draft
+  if (draftState) {
+    draftState = null;
+    document.getElementById('draftArea').classList.add('hidden');
+    document.getElementById('startDraftBtn').textContent = 'Start Mock Draft';
+  }
+}
+
+// ========== Players Display ==========
+function renderPlayers(filter = 'ALL') {
+  const grid = document.getElementById('playersGrid');
+  if (!grid) return;
+  const filtered = filter === 'ALL' ? PLAYERS : PLAYERS.filter(p => p.pos === filter);
+  
+  grid.innerHTML = filtered.map(p => `
+    <div class="player-card">
+      <div class="player-pos pos-${p.pos}">${p.pos}</div>
+      <div class="player-info">
+        <div class="player-name">${p.name}</div>
+        <div class="player-meta">${p.team} · ADP ${p.adp}</div>
+      </div>
+      <div class="player-rank">#${p.rank}</div>
+    </div>
+  `).join('');
+}
+
+// ========== Modal ==========
+function openMode(mode) {
+  const modal = document.getElementById('modeModal');
+  const title = document.getElementById('modalTitle');
+  const body = document.getElementById('modalBody');
+  
+  modal.classList.remove('hidden');
+  
+  const sportName = SPORTS[CURRENT_SPORT].name;
+  
+  const configs = {
+    public: {
+      title: 'Join a Public League',
+      html: `
+        <p style="color:var(--text-muted);margin-bottom:1.25rem;">Open ${sportName} leagues. First available spots go to whoever clicks first.</p>
+        <div class="modal-form">
+          <label>Your Team Name</label>
+          <input type="text" id="pubTeamName" value="Team Character" maxlength="20">
+          <label>Format</label>
+          <select id="pubFormat">
+            <option>Snake Draft</option>
+            <option>Auction Draft</option>
+          </select>
+          <div class="modal-actions">
+            <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+            <button class="btn btn-primary" onclick="joinPublic()">Find League</button>
+          </div>
+        </div>
+      `
+    },
+    private: {
+      title: 'Create Private League',
+      html: `
+        <p style="color:var(--text-muted);margin-bottom:1.25rem;">Set up a ${sportName} league for you and your friends. Everyone opens the same link, then uses the code below.</p>
+        <div class="modal-form">
+          <label>League Name</label>
+          <input type="text" id="privLeagueName" value="Character ${sportName} League" maxlength="30">
+          <label>Your Team Name</label>
+          <input type="text" id="privTeamName" value="Commissioner" maxlength="20">
+          <label>Number of Teams</label>
+          <select id="privTeams">
+            <option>6</option>
+            <option selected>8</option>
+            <option>10</option>
+            <option>12</option>
+          </select>
+          <div class="modal-actions">
+            <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+            <button class="btn btn-primary" onclick="createPrivate()">Create & Share Code</button>
+          </div>
+        </div>
+      `
+    },
+    cpu: {
+      title: 'Draft vs CPUs',
+      html: `
+        <p style="color:var(--text-muted);margin-bottom:1.25rem;">Practice ${sportName} against computer teams.</p>
+        <div class="modal-form">
+          <label>Your Team Name</label>
+          <input type="text" id="cpuTeamName" value="vs CPUs" maxlength="20">
+          <label>Difficulty</label>
+          <select id="cpuDiff">
+            <option value="easy">Easy</option>
+            <option value="standard" selected>Standard</option>
+            <option value="hard">Hard</option>
+            <option value="expert">Expert</option>
+          </select>
+          <label>Teams (including you)</label>
+          <select id="cpuTeams">
+            <option>8</option>
+            <option selected>10</option>
+            <option>12</option>
+          </select>
+          <div class="modal-actions">
+            <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+            <button class="btn btn-primary" onclick="startCpuDraft()">Start vs CPUs</button>
+          </div>
+        </div>
+      `
+    },
+    mock: {
+      title: 'Mock Draft',
+      html: `
+        <p style="color:var(--text-muted);margin-bottom:1.25rem;">Full ${sportName} practice draft. Zero stakes. Unlimited resets.</p>
+        <div class="modal-form">
+          <label>Your Team Name</label>
+          <input type="text" id="mockTeamName" value="Mock Team" maxlength="20">
+          <p style="font-size:0.9rem;color:var(--text-muted);">Use the Live Draft Board below to run a full mock immediately.</p>
+          <div class="modal-actions">
+            <button class="btn btn-ghost" onclick="closeModal()">Close</button>
+            <button class="btn btn-accent" onclick="closeModal(); scrollToSection('draft');">Go to Draft Board</button>
+          </div>
+        </div>
+      `
+    }
+  };
+  
+  const cfg = configs[mode];
+  title.textContent = cfg.title;
+  body.innerHTML = cfg.html;
+}
+
+function closeModal() {
+  document.getElementById('modeModal').classList.add('hidden');
+}
+
+function joinPublic() {
+  const name = document.getElementById('pubTeamName')?.value || 'Team Character';
+  closeModal();
+  alert(`Searching for open ${SPORTS[CURRENT_SPORT].name} leagues...\n\nFound: "Thursday Night Characters" (3 spots left)\n\nYou're in as "${name}"!\n\n(Demo mode — head to the Mock Draft to practice the full experience.)`);
+  scrollToSection('draft');
+}
+
+function createPrivate() {
+  const league = document.getElementById('privLeagueName')?.value || 'Character League';
+  const teamName = document.getElementById('privTeamName')?.value || 'Commissioner';
+  const teams = document.getElementById('privTeams')?.value || '8';
+  const code = Math.random().toString(36).substring(2, 8).toUpperCase();
+  const sportName = SPORTS[CURRENT_SPORT].name;
+  closeModal();
+  
+  // Show a nicer share modal
+  const shareHtml = `
+    <div style="text-align:center;">
+      <p style="color:var(--success);font-weight:700;margin-bottom:0.75rem;">League Created!</p>
+      <h3 style="margin-bottom:0.5rem;">${league}</h3>
+      <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:1.25rem;">${sportName} · ${teams} teams</p>
+      
+      <div style="background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:1rem;margin-bottom:1.25rem;">
+        <div style="font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.35rem;">Invite Code</div>
+        <div id="inviteCodeDisplay" style="font-family:var(--font-display);font-size:2rem;letter-spacing:0.15em;color:var(--accent);">${code}</div>
+      </div>
+      
+      <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1rem;text-align:left;">
+        <strong>How to play with friends right now:</strong><br>
+        1. Send them this page link<br>
+        2. Tell them the code: <strong>${code}</strong><br>
+        3. Everyone picks the same sport (${sportName})<br>
+        4. All start a Mock Draft with the same settings<br>
+        5. Call / text / Discord while you draft so you stay in sync
+      </p>
+      
+      <div class="modal-actions">
+        <button class="btn btn-ghost" onclick="navigator.clipboard.writeText('${code}'); this.textContent='Copied!';">Copy Code</button>
+        <button class="btn btn-primary" onclick="closeModal(); scrollToSection('draft');">Go to Draft Board</button>
+      </div>
+    </div>
+  `;
+  
+  document.getElementById('modalTitle').textContent = 'Share With Friends';
+  document.getElementById('modalBody').innerHTML = shareHtml;
+  document.getElementById('modeModal').classList.remove('hidden');
+}
+
+function startCpuDraft() {
+  const name = document.getElementById('cpuTeamName')?.value || 'vs CPUs';
+  closeModal();
+  document.getElementById('teamName').value = name;
+  scrollToSection('draft');
+  setTimeout(() => {
+    document.getElementById('startDraftBtn').click();
+  }, 300);
+}
+
+function scrollToSection(id) {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+}
+
+// ========== Draft Engine ==========
+let draftState = null;
+let timerInterval = null;
+
+function startDraft() {
+  const teamName = document.getElementById('teamName').value.trim() || 'Team Character';
+  const teamCount = parseInt(document.getElementById('teamCount').value, 10);
+  const mySlot = parseInt(document.getElementById('pickSlot').value, 10);
+  
+  const cpuNames = [
+    'Bot Bender', 'Algorithm Al', 'Silicon Squad', 'Neural Net',
+    'Circuit City', 'Binary Ballers', 'Pixel Pros', 'Code Crushers',
+    'Data Dynasty', 'Logic League', 'AI All-Stars', 'Machine Mode'
+  ];
+  
+  const teams = [];
+  for (let i = 1; i <= teamCount; i++) {
+    if (i === mySlot) {
+      teams.push({ id: i, name: teamName, isHuman: true, roster: [] });
+    } else {
+      teams.push({ id: i, name: cpuNames[(i - 1) % cpuNames.length], isHuman: false, roster: [] });
+    }
+  }
+  
+  draftState = {
+    teams,
+    mySlot,
+    teamCount,
+    pickNumber: 1,
+    round: 1,
+    direction: 1,
+    available: [...PLAYERS],
+    log: [],
+    isMyTurn: false,
+    finished: false,
+    timer: 30
+  };
+  
+  document.getElementById('draftArea').classList.remove('hidden');
+  document.getElementById('startDraftBtn').textContent = 'Restart Draft';
+  
+  renderRosterSlots();
+  updateAvailableList();
+  updateDraftStatus();
+  processNextPick();
+}
+
+function getCurrentTeamIndex() {
+  const { teamCount, direction } = draftState;
+  if (direction === 1) {
+    return (draftState.pickNumber - 1) % teamCount;
+  } else {
+    return teamCount - 1 - ((draftState.pickNumber - 1) % teamCount);
+  }
+}
+
+function updateDraftStatus() {
+  if (!draftState || draftState.finished) return;
+  
+  const teamIdx = getCurrentTeamIndex();
+  const team = draftState.teams[teamIdx];
+  const overall = draftState.pickNumber;
+  const roundPick = ((overall - 1) % draftState.teamCount) + 1;
+  
+  document.getElementById('onClock').textContent = team.name + (team.isHuman ? ' (YOU)' : '');
+  document.getElementById('pickNum').textContent = `Pick ${draftState.round}.${String(roundPick).padStart(2, '0')}`;
+  
+  draftState.isMyTurn = team.isHuman;
+  document.getElementById('autoPickBtn').disabled = !team.isHuman;
+  
+  draftState.timer = 30;
+  updateTimerDisplay();
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    draftState.timer--;
+    updateTimerDisplay();
+    if (draftState.timer <= 0) {
+      clearInterval(timerInterval);
+      if (draftState.isMyTurn) autoPick();
+    }
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  const t = Math.max(0, draftState.timer);
+  const m = Math.floor(t / 60);
+  const s = t % 60;
+  document.getElementById('timer').textContent = `${m}:${String(s).padStart(2, '0')}`;
+  document.getElementById('timer').style.color = t <= 5 ? 'var(--danger)' : 'var(--primary)';
+}
+
+function processNextPick() {
+  if (!draftState || draftState.finished) return;
+  
+  const totalPicks = draftState.teamCount * SLOT_ORDER.length;
+  if (draftState.pickNumber > totalPicks) {
+    endDraft();
+    return;
+  }
+  
+  updateDraftStatus();
+  
+  const teamIdx = getCurrentTeamIndex();
+  const team = draftState.teams[teamIdx];
+  
+  if (!team.isHuman) {
+    setTimeout(() => cpuPick(team), 700 + Math.random() * 1100);
+  }
+}
+
+function cpuPick(team) {
+  if (!draftState || draftState.finished) return;
+  
+  const rosterPos = team.roster.map(p => p.pos);
+  let pick = null;
+  
+  for (const player of draftState.available) {
+    const needsMore = SLOT_ORDER.filter(s => s === player.pos || s === 'FLEX' || s === 'UTIL' || s === 'G' || s === 'F' || s === 'BN').length >
+                      rosterPos.filter(p => p === player.pos).length;
+    if (needsMore || true) {
+      pick = player;
+      break;
+    }
+  }
+  
+  if (!pick && draftState.available.length) pick = draftState.available[0];
+  if (pick) makePick(team, pick);
+}
+
+function autoPick() {
+  if (!draftState || !draftState.isMyTurn) return;
+  const team = draftState.teams[draftState.mySlot - 1];
+  cpuPick(team);
+}
+
+function makePick(team, player) {
+  draftState.available = draftState.available.filter(p => p.id !== player.id);
+  team.roster.push(player);
+  
+  const overall = draftState.pickNumber;
+  const roundPick = ((overall - 1) % draftState.teamCount) + 1;
+  
+  draftState.log.unshift({
+    pick: `${draftState.round}.${String(roundPick).padStart(2, '0')}`,
+    team: team.name,
+    player: player.name,
+    pos: player.pos,
+    isMine: team.isHuman
+  });
+  
+  draftState.pickNumber++;
+  
+  if ((draftState.pickNumber - 1) % draftState.teamCount === 0) {
+    draftState.round++;
+    draftState.direction *= -1;
+  }
+  
+  updateAvailableList();
+  renderRosterSlots();
+  renderLog();
+  clearInterval(timerInterval);
+  setTimeout(() => processNextPick(), 280);
+}
+
+function humanPick(playerId) {
+  if (!draftState || !draftState.isMyTurn || draftState.finished) return;
+  const player = draftState.available.find(p => p.id === playerId);
+  if (!player) return;
+  const team = draftState.teams[draftState.mySlot - 1];
+  makePick(team, player);
+}
+
+function updateAvailableList(search = '') {
+  const list = document.getElementById('availableList');
+  if (!list) return;
+  if (!draftState) {
+    list.innerHTML = '<p style="color:var(--text-muted);padding:1rem;font-size:0.9rem;">Start a draft to see players</p>';
+    return;
+  }
+  
+  let players = draftState.available;
+  if (search) {
+    const q = search.toLowerCase();
+    players = players.filter(p => 
+      p.name.toLowerCase().includes(q) || 
+      p.pos.toLowerCase().includes(q) ||
+      p.team.toLowerCase().includes(q)
+    );
+  }
+  
+  list.innerHTML = players.slice(0, 50).map(p => `
+    <div class="available-item" onclick="humanPick(${p.id})" title="${p.note || ''}">
+      <div class="pos pos-${p.pos}">${p.pos}</div>
+      <div class="name">${p.name}</div>
+      <div class="rank">#${p.rank}</div>
+    </div>
+  `).join('');
+}
+
+function renderRosterSlots() {
+  const container = document.getElementById('myRoster');
+  if (!container) return;
+  if (!draftState) {
+    container.innerHTML = '';
+    return;
+  }
+  
+  const myTeam = draftState.teams[draftState.mySlot - 1];
+  const roster = myTeam.roster;
+  const filled = {};
+  
+  SLOT_ORDER.forEach((_, idx) => { filled[idx] = null; });
+  
+  roster.forEach(player => {
+    for (let i = 0; i < SLOT_ORDER.length; i++) {
+      if (filled[i]) continue;
+      const slot = SLOT_ORDER[i];
+      if (slot === player.pos || 
+          (slot === 'FLEX' && ['RB','WR','TE'].includes(player.pos)) ||
+          (slot === 'UTIL') ||
+          (slot === 'G' && ['PG','SG'].includes(player.pos)) ||
+          (slot === 'F' && ['SF','PF'].includes(player.pos)) ||
+          slot === 'BN') {
+        filled[i] = player;
+        break;
+      }
+    }
+  });
+  
+  container.innerHTML = SLOT_ORDER.map((slot, i) => {
+    const p = filled[i];
+    if (p) {
+      return `<div class="roster-slot filled"><span class="slot-label">${slot}</span><span class="player-name">${p.name}</span></div>`;
+    }
+    return `<div class="roster-slot"><span class="slot-label">${slot}</span><span class="player-name" style="color:var(--text-muted);opacity:0.5;">Empty</span></div>`;
+  }).join('');
+}
+
+function renderLog() {
+  const container = document.getElementById('draftLog');
+  if (!container || !draftState) return;
+  container.innerHTML = draftState.log.map(e => `
+    <div class="log-entry ${e.isMine ? 'mine' : ''}">
+      <strong>${e.pick}</strong> ${e.team} selects <strong>${e.player}</strong> (${e.pos})
+    </div>
+  `).join('');
+}
+
+function endDraft() {
+  draftState.finished = true;
+  clearInterval(timerInterval);
+  document.getElementById('onClock').textContent = 'Draft Complete';
+  document.getElementById('pickNum').textContent = '✓';
+  document.getElementById('timer').textContent = 'DONE';
+  document.getElementById('autoPickBtn').disabled = true;
+  
+  const myTeam = draftState.teams[draftState.mySlot - 1];
+  alert(`Draft finished!\n\n${myTeam.name} roster locked.\nYou drafted ${myTeam.roster.length} characters.`);
+}
+
+
+function shareDraftSettings() {
+  const teamName = document.getElementById('teamName')?.value || 'Team Character';
+  const teamCount = document.getElementById('teamCount')?.value || '10';
+  const pickSlot = document.getElementById('pickSlot')?.value || '5';
+  const sportName = SPORTS[CURRENT_SPORT].name;
+  const sportKey = CURRENT_SPORT;
+  
+  const message = `Let's draft together!\n\nSport: ${sportName}\nTeams: ${teamCount}\nMy pick slot: ${pickSlot}\n\n1. Open this link: ${window.location.href}\n2. Select ${sportName} at the top\n3. Set Teams = ${teamCount}\n4. Start Mock Draft\n5. Stay on a call so we pick in order`;
+  
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(message).then(() => {
+      alert('Settings copied!\n\nPaste this message to your friends (text, Discord, group chat, etc.).');
+    }).catch(() => {
+      prompt('Copy this and send to your friends:', message);
+    });
+  } else {
+    prompt('Copy this and send to your friends:', message);
+  }
+}
+
+// Event listeners
+document.getElementById('startDraftBtn')?.addEventListener('click', startDraft);
+document.getElementById('autoPickBtn')?.addEventListener('click', autoPick);
+document.getElementById('playerSearch')?.addEventListener('input', (e) => {
+  updateAvailableList(e.target.value);
+});
+
+document.getElementById('modeModal')?.addEventListener('click', (e) => {
+  if (e.target.id === 'modeModal') closeModal();
+});
+
+// Init
+document.addEventListener('DOMContentLoaded', () => {
+  setSport('football');
+});
+
+</script>
+
+
+</body></html>
